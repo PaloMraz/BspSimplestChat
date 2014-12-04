@@ -1,0 +1,42 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <title>Simplest Chat</title>
+</head>
+<body>
+  <h1>Simplest Chat</h1>
+
+  <input type="text" id="_text" />
+  <input type="button" id="_sendButton" value="Send" />
+
+  <hr />
+
+  <div id="_messages"></div>
+
+  <script src="Scripts/jquery-1.10.2.js"></script>
+  <script src="Scripts/jquery.signalR-2.1.2.js"></script>
+  <script src="signalr/hubs"></script>
+
+  <script>
+    $(function () {
+
+      var text = $("#_text");
+      var sendButton = $("#_sendButton");
+      var messages = $("#_messages");
+
+      var chatHub = $.connection.ChatHub;
+
+      chatHub.client.MessageReceived = function (message) {
+        messages.append($("<div />").text("Message received: " + message));
+      };
+
+      $.connection.hub.start().done(function () {
+        sendButton.click(function () {
+          chatHub.server.Send(text.val());
+        });
+      });
+
+    })
+  </script>
+</body>
+</html>

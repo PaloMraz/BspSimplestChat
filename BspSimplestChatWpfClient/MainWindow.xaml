@@ -1,0 +1,23 @@
+﻿<Window x:Class="BspSimplestChatWpfClient.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="MainWindow" Height="350" Width="525">
+  
+   <Grid Margin="10">
+    <Grid.ColumnDefinitions>
+      <ColumnDefinition></ColumnDefinition>
+      <ColumnDefinition></ColumnDefinition>
+    </Grid.ColumnDefinitions>
+    <Grid.RowDefinitions>
+      <RowDefinition Height="Auto"></RowDefinition>
+      <RowDefinition Height="*"></RowDefinition>
+    </Grid.RowDefinitions>
+
+    <TextBox Grid.Row="0" Grid.Column="0" Text="{Binding Path=Text}"></TextBox>
+    <Button Grid.Row="0" Grid.Column="1" Command="{Binding Path=SendCommand}" Content="Send"></Button>
+
+    <ListBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" ItemsSource="{Binding Path=Messages}">
+    </ListBox>
+  </Grid>
+
+</Window>
